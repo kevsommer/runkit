@@ -21,7 +21,6 @@ export default function ChipGroup<T extends string | number>({
   options,
   value,
   onChange,
-  scroll = false,
   fill = false,
   hideLegend = false,
 }: {
@@ -29,7 +28,6 @@ export default function ChipGroup<T extends string | number>({
   options: ChipOption<T>[];
   value: T;
   onChange: (value: T) => void;
-  scroll?: boolean;
   /** Stretch chips into equal-width columns on a single row. */
   fill?: boolean;
   hideLegend?: boolean;
@@ -39,18 +37,12 @@ export default function ChipGroup<T extends string | number>({
     <fieldset className="min-w-0">
       <legend className={hideLegend ? "sr-only" : "eyebrow mb-2"}>{legend}</legend>
       <div
-        className={
-          scroll
-            ? "no-scrollbar -mx-5 flex snap-x scroll-px-5 gap-2 overflow-x-auto px-5 pb-1 lg:mx-0 lg:scroll-px-0 lg:px-0"
-            : fill
-              ? "flex gap-1 min-[360px]:gap-1.5"
-              : "flex flex-wrap gap-2"
-        }
+        className={fill ? "flex gap-1 min-[360px]:gap-1.5" : "flex flex-wrap gap-2"}
       >
         {options.map((o) => {
           const checked = o.value === value;
           return (
-            <label key={String(o.value)} className={`relative snap-start ${fill ? "min-w-0 flex-1" : "shrink-0"}`}>
+            <label key={String(o.value)} className={`relative ${fill ? "min-w-0 flex-1" : "shrink-0"}`}>
               <input
                 type="radio"
                 name={name}

@@ -93,7 +93,10 @@ export function DurationSelector({ value, onChange, legend = "How long?" }: {
 
 const HOUR = 3_600_000;
 
-/** "Now" plus the next full hours the forecast covers. */
+/** How many upcoming full-hour starts to offer after "Now". */
+const START_SLOTS = 3;
+
+/** "Now" plus the next few full hours the forecast covers. */
 export function StartTimeSelector({
   value,
   onChange,
@@ -112,7 +115,7 @@ export function StartTimeSelector({
   const tomorrow = dayKey(now + 24 * HOUR, timeZone);
   const first = Math.ceil(now / HOUR) * HOUR + (Math.ceil(now / HOUR) * HOUR - now < 15 * 60_000 ? HOUR : 0);
   const options: ChipOption<string>[] = [{ value: "now", label: "Now" }];
-  for (let t = first; t <= Math.min(latestStart, now + 36 * HOUR); t += HOUR) {
+  for (let i = 0, t = first; i < START_SLOTS && t <= latestStart; i++, t += HOUR) {
     const d = dayKey(t, timeZone);
     options.push({
       value: String(t),
@@ -130,7 +133,7 @@ export function StartTimeSelector({
       options={options}
       value={value === "now" ? "now" : String(value)}
       onChange={(v) => onChange(v === "now" ? "now" : Number(v))}
-      scroll
+      fill
     />
   );
 }
