@@ -78,16 +78,16 @@ export default function Home() {
 
   return (
     <main className={`${pageShell} lg:grid lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-14`}>
-      <div className="flex flex-col gap-7 pb-28 lg:pb-0">
+      <div className="flex flex-col gap-5 pb-14 lg:gap-7 lg:pb-0">
         <HomeHeader />
 
-        <section aria-label="Current weather" className="flex flex-col gap-3">
+        <section aria-label="Current weather" className="flex flex-col gap-2 lg:gap-3">
           <LocationButton state={state} onClick={() => setSheetOpen(true)} />
           <WeatherCard state={state} />
         </section>
 
         <form
-          className="flex flex-col gap-7"
+          className="flex flex-col gap-5 lg:gap-7"
           onSubmit={(e) => {
             e.preventDefault();
             router.push("/result");

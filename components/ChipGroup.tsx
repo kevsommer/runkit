@@ -37,7 +37,7 @@ export default function ChipGroup<T extends string | number>({
   const name = useId();
   return (
     <fieldset className="min-w-0">
-      <legend className={hideLegend ? "sr-only" : "eyebrow mb-2.5"}>{legend}</legend>
+      <legend className={hideLegend ? "sr-only" : "eyebrow mb-2"}>{legend}</legend>
       <div
         className={
           scroll
@@ -61,7 +61,7 @@ export default function ChipGroup<T extends string | number>({
                 className="peer sr-only"
               />
               <span
-                className={`flex min-h-11 cursor-pointer select-none flex-col items-center justify-center rounded-2xl border py-2 ${fill ? "px-0.5 text-xs min-[360px]:text-[13px] min-[380px]:text-sm" : "px-4 text-sm"} font-medium transition-colors duration-150 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent ${
+                className={`flex min-h-11 cursor-pointer select-none flex-col items-center justify-center rounded-2xl border ${o.sub ? "py-1" : "py-2"} ${fill ? "px-0.5 text-xs min-[360px]:text-[13px] min-[380px]:text-sm" : "px-4 text-sm"} font-medium transition-colors duration-150 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent ${
                   checked
                     ? "border-foreground bg-foreground text-background"
                     : "border-border bg-chip text-foreground hover:border-muted"

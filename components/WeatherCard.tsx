@@ -98,20 +98,19 @@ export default function WeatherCard({ state }: { state: State }) {
   const t = settings.tempUnit;
   return (
     <div className="rk-rise">
-      <p className="eyebrow">Right now</p>
-      <div className="mt-1 flex items-end gap-4">
-        <span className="text-7xl font-semibold leading-none tracking-tighter tabular-nums">
+      <div className="flex items-end gap-4">
+        <span className="text-6xl font-semibold sm:text-7xl leading-none tracking-tighter tabular-nums">
           {formatTemp(c.temperature, t)}
         </span>
         <div className="pb-1.5">
           <p className="text-sm text-muted">Feels like</p>
           <p className="text-xl font-semibold tabular-nums">{formatTemp(c.feelsLike, t)}</p>
         </div>
-        <span className="ml-auto pb-1 text-5xl" aria-hidden>
+        <span className="ml-auto pb-1 text-4xl sm:text-5xl" aria-hidden>
           {conditionEmoji(c.weatherCode, c.isDay)}
         </span>
       </div>
-      <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
         <li className="font-medium text-foreground">{c.condition}</li>
         <li>
           <span aria-hidden>💨 </span>

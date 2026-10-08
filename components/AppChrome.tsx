@@ -53,7 +53,7 @@ export function Splash() {
 }
 
 export const pageShell =
-  "mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 pt-[max(1.25rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]";
+  "mx-auto flex w-full max-w-6xl flex-1 flex-col px-5 pt-[max(0.75rem,env(safe-area-inset-top))] lg:pt-[max(1.25rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))]";
 
 export const primaryButton =
   "flex h-14 w-full items-center justify-center rounded-2xl bg-accent px-6 text-base font-bold tracking-wide text-accent-ink shadow-[0_8px_24px_-8px_var(--accent)] transition hover:brightness-105 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground disabled:opacity-40 disabled:shadow-none";

@@ -28,7 +28,7 @@ export function RunSelector({ value, onChange, legend = "What kind of run?" }: {
   onChange: (v: RunType) => void;
   legend?: string;
 }) {
-  return <ChipGroup legend={legend} options={RUN_TYPES} value={value} onChange={onChange} />;
+  return <ChipGroup legend={legend} options={RUN_TYPES} value={value} onChange={onChange} fill />;
 }
 
 export function TemperaturePreferenceSelector({ value, onChange, legend = "I usually feel" }: {
