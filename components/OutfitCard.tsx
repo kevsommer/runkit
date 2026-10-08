@@ -8,7 +8,6 @@ const ROLE: Record<string, string> = {
   outer: "Outer layer",
   top: "Top",
   bottom: "Bottoms",
-  socks: "Socks",
   accessory: "Extra",
 };
 
@@ -34,7 +33,8 @@ export function RunnerFigure({ recommendation, className }: { recommendation: Ou
 }
 
 export default function OutfitCard({ recommendation }: { recommendation: OutfitRecommendation }) {
-  const items = outfitItems(recommendation);
+  // Socks are left out: most runners wear the same pair regardless of weather.
+  const items = outfitItems(recommendation).filter((item) => item.category !== "socks");
   return (
     <section aria-labelledby="wear-this">
       <h2 id="wear-this" className="eyebrow mb-3">

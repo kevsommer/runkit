@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import ExplanationCard, { WarningList } from "./ExplanationCard";
-import OutfitCard, { RunnerFigure } from "./OutfitCard";
+import OutfitCard from "./OutfitCard";
 import WeatherTimeline from "./WeatherTimeline";
 import { StaleNotice } from "./WeatherCard";
 import { RUN_TYPE_LABEL } from "@/lib/recommendation/explanations";
@@ -49,16 +49,11 @@ export default function ResultView({ state, result, layout = "page" }: { state: 
       <WarningList warnings={danger} fmt={fmt} />
 
       <div className={wide ? "grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start" : "flex flex-col gap-6"}>
-        <div className={`rounded-3xl border border-border bg-card px-4 pt-4 ${wide ? "md:sticky md:top-6" : ""}`}>
-          <RunnerFigure
-            key={`${rec.top.id}-${rec.bottom.id}-${rec.outerLayer?.id}`}
-            recommendation={rec}
-            className="rk-rise mx-auto block w-full max-w-sm text-foreground"
-          />
-        </div>
-        <div className="flex flex-col gap-6">
+        <div className={`flex flex-col gap-6 ${wide ? "md:sticky md:top-6" : ""}`}>
           <OutfitCard recommendation={rec} />
           <WarningList warnings={notes} fmt={fmt} title="Heads up" />
+        </div>
+        <div className="flex flex-col gap-6">
           <ExplanationCard recommendation={rec} fmt={fmt} />
           <WeatherTimeline weather={weather} runWeather={rw} startMs={startMs} endMs={endMs} settings={settings} />
           <p className="px-1 text-xs leading-relaxed text-muted">
