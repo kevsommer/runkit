@@ -14,6 +14,21 @@ type Ready = Extract<RunResult, { status: "ready" }>;
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+/** "12°", or "12° → 9°" when it changes during the run. */
+function TempRange({ from, to, unit }: { from: number; to: number; unit: State["settings"]["tempUnit"] }) {
+  return (
+    <>
+      {formatTemp(from, unit)}
+      {Math.round(from) !== Math.round(to) && (
+        <>
+          {" "}
+          <span className="text-muted" aria-label="to">→</span> {formatTemp(to, unit)}
+        </>
+      )}
+    </>
+  );
+}
+
 export default function ResultView({ state, result, layout = "page" }: { state: State; result: Ready; layout?: "page" | "panel" }) {
   const { settings, weather, location } = state;
   const { recommendation: rec, runWeather: rw, startMs, endMs, input } = result;
@@ -30,15 +45,17 @@ export default function ResultView({ state, result, layout = "page" }: { state: 
       <header>
         <p className="eyebrow">Your run</p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">{location?.name}</h1>
-        <p className="mt-1 text-4xl font-semibold tracking-tighter tabular-nums">
-          {formatTemp(rw.start.temperature, settings.tempUnit)}
-          {Math.round(rw.start.temperature) !== Math.round(rw.end.temperature) && (
-            <>
-              {" "}
-              <span className="text-muted" aria-label="to">→</span> {formatTemp(rw.end.temperature, settings.tempUnit)}
-            </>
-          )}
-        </p>
+        <div className="mt-1 flex flex-wrap items-end gap-x-5 gap-y-1">
+          <p className="text-4xl font-semibold tracking-tighter tabular-nums">
+            <TempRange from={rw.start.temperature} to={rw.end.temperature} unit={settings.tempUnit} />
+          </p>
+          <div className="pb-0.5">
+            <p className="text-sm leading-tight text-muted">Feels like</p>
+            <p className="text-2xl font-semibold leading-tight tracking-tight tabular-nums">
+              <TempRange from={rw.start.feelsLike} to={rw.end.feelsLike} unit={settings.tempUnit} />
+            </p>
+          </div>
+        </div>
         <p className="mt-1 text-sm text-muted">
           {formatTime(startMs, tz)}–{formatTime(endMs, tz)} · {formatDuration(input.durationMinutes)} ·{" "}
           {capitalize(RUN_TYPE_LABEL[input.runType])}
