@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f5f2;
+  --foreground: #12151a;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --border: #e6e6e1;
+  --chip: #ffffff;
+  --accent: #ff5a1f;
+  --accent-ink: #ffffff;
+  --accent-soft: #ffede5;
+  --backdrop: #ffede5;
+  --shadow: rgba(18, 21, 26, 0.09);
+  --danger: #b42318;
+  --danger-soft: #fef0ee;
+  --caution: #8a5a00;
+  --caution-soft: #fff6e0;
+}
+
+.dark {
+  --background: #0c0e12;
+  --foreground: #f2f3f5;
+  --card: #15181e;
+  --muted: #9aa1ad;
+  --border: #252a33;
+  --chip: #15181e;
+  --accent: #ff6a33;
+  --accent-ink: #12151a;
+  --accent-soft: #2a1a12;
+  --backdrop: #1d2027;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --danger: #ff8a7a;
+  --danger-soft: #2c1513;
+  --caution: #f5c451;
+  --caution-soft: #2a2210;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-chip: var(--chip);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-caution: var(--caution);
+  --color-caution-soft: var(--caution-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Small eyebrow labels used throughout */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@keyframes rk-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rk-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.rk-rise {
+  animation: rk-rise 320ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.rk-garment {
+  animation: rk-fade 280ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide scrollbars on horizontal chip rows while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
