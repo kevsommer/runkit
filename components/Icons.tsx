@@ -62,3 +62,10 @@ export const CloseIcon = ({ className = "size-5" }: P) => (
     <path d="M18 6 6 18M6 6l12 12" />
   </svg>
 );
+
+export const PencilIcon = ({ className = "size-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}>
+    <path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z" />
+    <path d="m13.5 6.5 4 4" />
+  </svg>
+);

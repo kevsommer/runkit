@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ChipGroup, { type ChipOption } from "./ChipGroup";
+import { PencilIcon } from "./Icons";
 import type { RunType, TemperaturePreference } from "@/lib/recommendation/types";
 import { dayKey, formatTime } from "@/lib/format";
 import type { RunPlan } from "@/lib/store";
@@ -14,7 +15,7 @@ export const RUN_TYPES: ChipOption<RunType>[] = [
   { value: "race", label: "Race" },
 ];
 
-export const DURATIONS = [20, 30, 45, 60, 75, 90, 120];
+export const DURATIONS = [30, 45, 60, 90, 120];
 
 export const PREFERENCES: ChipOption<TemperaturePreference>[] = [
   { value: "cold", label: "Cold", ariaLabel: "I get cold easily" },
@@ -38,7 +39,8 @@ export function TemperaturePreferenceSelector({ value, onChange, legend = "I usu
   return <ChipGroup legend={legend} options={PREFERENCES} value={value} onChange={onChange} />;
 }
 
-const durationLabel = (m: number) => (m >= 120 ? `${m}m+` : `${m}m`);
+const DURATION_LABEL: Record<number, string> = { 60: "1h", 90: "1,5h", 120: "2h+" };
+const durationLabel = (m: number) => DURATION_LABEL[m] ?? `${m}m`;
 
 export function DurationSelector({ value, onChange, legend = "How long?" }: {
   value: number;
@@ -49,7 +51,7 @@ export function DurationSelector({ value, onChange, legend = "How long?" }: {
   const [custom, setCustom] = useState(!isPreset);
   const options: ChipOption<number>[] = [
     ...DURATIONS.map((m) => ({ value: m, label: durationLabel(m), ariaLabel: `${m} minutes` })),
-    { value: -1, label: "Custom" },
+    { value: -1, label: "Custom", ariaLabel: "Custom duration", icon: <PencilIcon /> },
   ];
   return (
     <div>
@@ -57,6 +59,7 @@ export function DurationSelector({ value, onChange, legend = "How long?" }: {
         legend={legend}
         options={options}
         value={custom ? -1 : value}
+        fill
         onChange={(v) => {
           if (v === -1) {
             setCustom(true);
